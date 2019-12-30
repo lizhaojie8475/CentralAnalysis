@@ -4,7 +4,7 @@ import re
 from Src.SQLHelper.MySQLHelper import MySqlHelper
 import pandas as pd
 
-if __name__ == "__main__":
+def insertCityInfo():
     dirPath = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     dirPath += "/Data/"
 
@@ -16,7 +16,6 @@ if __name__ == "__main__":
         cityObjs = map(lambda cityString: json.loads(cityString), cityStrings)
         cityObjs = list(cityObjs)
 
-
     helper = MySqlHelper()
     helper.connect()
     for obj in cityObjs:
@@ -25,3 +24,6 @@ if __name__ == "__main__":
 
     helper.close()
 
+if __name__ == "__main__":
+    lis = ["北京", "天津", "西安"]
+    print("西安" in lis)

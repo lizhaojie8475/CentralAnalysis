@@ -29,6 +29,5 @@ def insertCityInfo():
 
 
 if __name__ == "__main__":
-    a = list(["1","2","3"])
-    b = list(["4","5","6"])
-    print(a+b)
+    a = np.array([1,2,3])
+    print(a > 1)

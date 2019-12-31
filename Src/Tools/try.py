@@ -3,6 +3,9 @@ import sys, os
 import re
 from Src.SQLHelper.MySQLHelper import MySqlHelper
 import pandas as pd
+import numpy as np
+import Src.Analyzer.chooseNewProbes as cp
+import math
 
 def insertCityInfo():
     dirPath = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
@@ -24,6 +27,8 @@ def insertCityInfo():
 
     helper.close()
 
+
 if __name__ == "__main__":
-    lis = ["北京", "天津", "西安"]
-    print("西安" in lis)
+    a = list(["1","2","3"])
+    b = list(["4","5","6"])
+    print(a+b)

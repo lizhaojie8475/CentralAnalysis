@@ -38,11 +38,35 @@ class MySqlHelper():
         self.cur.executemany(sql, args)
         self.conn.commit()
 
-    def update(self, fieldList, valueList, tableName, whereField, whereValue):
+    def updateSameobjDiffield(self, fieldList, valueList, tableName, whereField=None, whereValue=None):
+        """
+        该函数用来更新特定某一个元组的多个字段。所以whereField和whereValue都只有一个唯一取值
+        而fieldList和valueList都是列表，且长度必须相同
+        """
         if len(fieldList) != len(valueList):
-            print("the number of field and value must be the same !")
+            print("this function is used to update different fields of the same field !")
+            print("so the len of fieldList and valueList have to be the same !")
+        elif whereValue is None and whereField is None:
+            for field, value in zip(fieldList, valueList):
+                sql = 'UPDATE %s SET %s = "%s" ' % (tableName, field, value)
+                self.cur.execute(sql)
+            self.conn.commit()
         else:
             for field, value in zip(fieldList, valueList):
+                sql = 'UPDATE %s SET %s = "%s" WHERE %s = "%s" ' % (tableName, field, value, whereField, whereValue)
+                self.cur.execute(sql)
+            self.conn.commit()
+
+    def updateSamefieldDiffobj(self, field, valueList, tableName, whereField, whereValueList):
+        """
+        该函数用来更新多个不同元组的同一个字段，所以只能指定一个字段属性，即field属性是一个string
+        而valueList和whereValueList的长度必须相同
+        """
+        if len(valueList) != len(whereValueList):
+            print("this function is used to update the same field of different objs !")
+            print("so the len of valueList and whereValueList have to be the same !")
+        else:
+            for whereValue, value in zip(whereValueList, valueList):
                 sql = 'UPDATE %s SET %s = "%s" WHERE %s = "%s" ' % (tableName, field, value, whereField, whereValue)
                 self.cur.execute(sql)
             self.conn.commit()

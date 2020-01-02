@@ -29,6 +29,5 @@ def insertCityInfo():
 
 
 if __name__ == "__main__":
-    a = np.array(["2","1","$"])
-    b = np.array([])
-    print(b == a)
+    a = np.array([[1,3,3], [4,5,6]])
+    print(np.unique(a))
